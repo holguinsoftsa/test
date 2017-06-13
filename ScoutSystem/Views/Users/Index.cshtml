@@ -1,0 +1,142 @@
+﻿@{
+    ViewBag.Title = "Users";
+}
+
+<div ng-controller="UserController">
+    <header class="row accounts-header">
+        <div class="col-sm-12">
+            <h2>Accounts</h2>
+        </div>
+    </header>
+
+    <!--Search Bar-->
+    <div class="row">
+        <div class="col-xs-8 col-sm-4 col-md-3 form-group">
+            <label>Filter by Email</label>
+            <input type="text" ng-model="search.Email" class="form-control" />
+        </div>
+        <div class="col-xs-8 col-sm-4 col-md-3 form-group">
+            <label>Filter by Production</label>
+            <input type="text" ng-model="search.Production" class="form-control" />
+        </div>
+    </div>
+    <!--Action Buttons-->
+    <div class="row form-group">
+        <div class="col-md-1">
+            <button ng-click="newUserPanel.Open()" class="btn btn-default plus-button">New User</button>
+        </div>
+    </div>
+    <hr />
+
+    <!--User List-->
+    <h2>Users</h2>
+    <div class="row user-listitem" ng-repeat="n in userList | filter: search.Email | filter: search.Production | orderBy:['!Active','Email']" ng-click="ClickListUser(n, $index)" ng-class="{'user-deactivated' : !n.Active}">
+        <div class="col-xs-12">
+            <div class="row">
+                <div class="col-sm-6 col-md-5">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-8">
+                            <div><span class="bold">Name: </span>{{n.Username}}</div>
+                            <div><span class="bold">Email: </span>{{n.Email}}</div>
+                        </div>
+                        <div class="col-sm-12 col-md-4">
+                            <div><span class="bold">SSO: </span>{{n.SSO}}</div>
+                            <div><span class="bold">Active: </span>{{n.Active? "Yes" : "No"}}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-7">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-4">
+                            <div><span class="bold">Role: </span>{{n.Role}}</div>
+                            <div><span class="bold">Production: </span>{{(n.Production != null)? n.Production : "-"}}</div>
+                        </div>
+                        <div class="col-sm-12 col-md-8">
+                            <a ng-click="ChangePassword(n)">Change Password</a> |
+                            <a ng-click="ToggleActive(n)">{{(n.Active? "Deactivate" : "Activate")}}</a> |
+                            <a ng-click="ChangeProduction(n)">Assign Production</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--New User Panel-->
+    <panel ng-model="newUserPanel" title="New User">
+        <div class="row">
+            <div class="col-xs-12">
+                <span class="alert-danger">{{newUserErrorMessage}}</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-3">
+                <div class="form-group">
+                    <label for="" class="NewTaskLabel">First Name</label>
+                    <input type="text" ng-model="newUser.FirstName" placeholder="First" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="" class="NewTaskLabel">Last Name</label>
+                    <input type="text" ng-model="newUser.LastName" placeholder="Last" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="" class="NewTaskLabel">SSO</label>
+                    <input ng-model="newUser.SSO" type="number" min="0" ng-maxlength="9" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="" class="NewTaskLabel">Email</label>
+                    <input type="text" ng-model="newUser.Email" placeholder="Email" class="form-control" />
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-3">
+                <div class="form-group">
+                    <label for="" class="NewTaskLabel">Password</label>
+                    <input type="Password" ng-model="newUser.Password" placeholder="Password" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="" class="NewTaskLabel">Confirm Password</label>
+                    <input type="Password" ng-model="newUser.ConfirmPassword" placeholder="Confirm Password" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label class="NewTaskLabel">Role</label>@*Setting the role as Scout is a workaround. If it's not done, angular leaves select blank.*@
+                    <select class="form-control" ng-model="newUser.Role" ng-init="newUser.Role = 'Scout'" ng-options="n.Name as n.Name for n in roles"></select>
+                </div>
+                <div class="form-group">
+                    <label>Production</label>
+                    <select class="form-control" ng-model="newUser.ProductionID" ng-options="n.ID as n.Name for n in productions"></select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="row col-xs-11 col-sm-12">
+                <div class="col-xs-6 col-sm-2 col-md-2 col-lg-1">
+                    <button class="btn btn-primary btn-block" ng-click="NewUserSubmit(false)">Submit</button>
+                </div>
+                <div class="col-xs-6 col-sm-2 col-md-2 col-lg-1 col-lg-offset-1">
+                    <button class="btn btn-danger btn-block" ng-click="newUserPanel.Close()">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </panel>
+
+    <!--Production Change Panel-->
+    <div class="alert-window" ng-show="showProductionPanel">
+        <div class="alert-window-main col-xs-8 col-xs-offset-2 col-sm-4 col-sm-offset-5 col-lg-2 col-lg-offset-6">
+            <div class="form-group">
+                <label>Production for user {{prodUser.Email}}</label>
+                <select class="form-control" ng-model="prodUser.ProductionID" ng-options="n.ID as n.Name for n in productions"></select>
+            </div>
+            <div class="row">
+                <div class="col-xs-6">
+                    <button class="btn btn-success btn-block alert-success-btn" ng-click="SubmitChangeProduction()">Save</button>
+                </div>
+                <div class="col-xs-6">
+                    <button class="btn btn-danger btn-block Task-Danger-Btn" ng-click="CloseProductionPanel()">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+

@@ -1,0 +1,63 @@
+﻿
+@{
+    ViewBag.Title = "Production";
+}
+<div ng-controller="ProductionController">
+
+    <header class="row production-header">
+        <div class="col-sm-12">
+            <h2>Production</h2>
+        </div>
+    </header>
+
+
+    <!--Search Bar-->
+    <div class="row">
+        <div class="col-xs-8 col-sm-4 col-md-3 form-group">
+            <label>Search Productions</label>
+            <input type="text" ng-model="search.Production" class="form-control" />
+        </div>
+
+    </div>
+    <!--Action Buttons-->
+    <div class="row form-group">
+        <div class="col-md-1">
+            <button ng-click="ClickNewProduction()" class="btn btn-default plus-button">New Production</button>
+        </div>
+    </div>
+
+    <!--User List-->
+    <div class="table-container">
+        <table class="table">
+            <tr>
+                <th>Production</th>
+                <th>Actions</th>
+            </tr>
+            <tr ng-repeat="n in productions | filter: search.Production | orderBy:['Name']" ng-click="ClickListUser(n, $index)">
+                <td>{{n.Name}}</td>
+                <td>
+                    <a ng-click="RemoveUsers(n)">Remove Users</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <!--New Production Window-->
+    <div class="alert-window" ng-show="showNewProductionWindow">
+        <div class="alert-window-main col-xs-8 col-xs-offset-2 col-sm-4 col-sm-offset-5 col-lg-2 col-lg-offset-6">
+            <div class="form-group">
+                <label>New Production{{prodUser.Email}}</label>
+                <input ng-model="newProdName" placeholder="Name" class="form-control text-uppercase" />
+            </div>
+            <div class="row">
+                <div class="col-xs-6 col-sm-6 col-sm-offset-0">
+                    <button class="btn btn-danger btn-block Task-Danger-Btn" ng-click="CloseNewProduction()">Cancel</button>
+                </div>
+                <div class="col-xs-6 col-sm-6">
+                    <button class="btn btn-success btn-block alert-success-btn" ng-click="SubmitNewProduction()">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

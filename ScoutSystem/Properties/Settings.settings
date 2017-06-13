@@ -1,0 +1,45 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="ScoutSystem.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="SMTP_Host" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">smtp.sendgrid.net</Value>
+    </Setting>
+    <Setting Name="SMTP_Username" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Telemundoenterprises</Value>
+    </Setting>
+    <Setting Name="SMTP_Password" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">@pptms2016</Value>
+    </Setting>
+    <Setting Name="SMTP_Port" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">587</Value>
+    </Setting>
+    <Setting Name="Role_Admin" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Admin</Value>
+    </Setting>
+    <Setting Name="Role_Scout" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Scout</Value>
+    </Setting>
+    <Setting Name="Role_Manager" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Manager</Value>
+    </Setting>
+    <Setting Name="Role_BusinessAffair" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Business Affairs</Value>
+    </Setting>
+    <Setting Name="Role_OnSiteManager" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">OnSite Manager</Value>
+    </Setting>
+    <Setting Name="OnSiteReport_DistributionList" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">appsdev@nbcuni.com</Value>
+    </Setting>
+    <Setting Name="OnSiteReport_EmailSubject" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">{0} - On-Site Location Report</Value>
+    </Setting>
+    <Setting Name="OnSiteReport_DistributionList_ORIG" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">onsite_location_report@nbcuni.com</Value>
+    </Setting>
+    <Setting Name="ScoutReport_DistributionList" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">tlmdlocationhub@nbcuni.com</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

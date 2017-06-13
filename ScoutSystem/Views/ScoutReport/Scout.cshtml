@@ -1,0 +1,291 @@
+﻿@{
+    ViewBag.Title = "Scout Reports";
+}
+
+<div ng-controller="ScoutReport-ScoutController">
+
+    <header class="row dailyreport-header">
+        <div class="col-xs-12">
+            <h2 class="page-title">{{userProd}} - Daily Reports</h2>
+        </div>
+    </header>
+
+    <!--Top Bar-->
+    <div class="row">
+        <div class="col-sm-12">
+            <label class="control-label">Date Range</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-9 col-md-9 col-lg-7">
+            <div class="row form-group">
+                <div class="col-sm-4">
+                    <div class="inner-addon left-addon">
+                        <datepicker date-format="M/d/yy" date-set="{{dateSearch.StartDate.toISOString().substring(0,10)}}">
+                            <input class="form-control" type="text" ng-model="dateSearch.StartDate" />
+                        </datepicker>
+                        <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+                        <input class="form-control" style="height:0; opacity:0; margin-bottom:-30px;">@*<-Weird as heck bug. Don't remove unless you're removing Datepicker*@
+                    </div>
+                </div>
+
+                <div class="col-sm-1 text-center">
+                    <strong>-</strong>
+                </div>
+
+                <div class="col-sm-4 form-group">
+                    <div class="inner-addon left-addon">
+                        <datepicker date-format="M/d/yy" date-set="{{dateSearch.EndDate.toISOString().substring(0,10)}}">
+                            <input class="form-control" type="text" ng-model="dateSearch.EndDate" />
+                        </datepicker>
+                        <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+                        <input class="form-control" style="height:0; opacity:0; margin-bottom:-30px;">@*<-Weird as heck bug. Don't remove unless you're removing Datepicker*@
+                    </div>
+                </div>
+                <div class="col-sm-9 col-md-3">
+                    <button class="btn btn-primary btn-block" ng-click="OnClickFilter()">
+                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Search Reports
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-6 col-sm-2 col-sm-offset-0 col-lg-offset-3">
+            <button ng-click="newTaskPanel.Open()" class="btn btn-default plus-button">New Report</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-1 col-sm-offset-9 col-md-3 col-md-offset-9 col-lg-2 col-lg-offset-10">
+            <button ng-click="draftPanel.Open()" class="btn btn-default">
+                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                Saved Drafts
+            </button>
+        </div>
+    </div>
+    <br />
+
+    <!--List Table-->
+    <h3>Reports</h3>
+    <div>
+        <!--Responsive Table-->
+        <!--MD LG Table Header-->
+        <div class="col-xs-12 hidden-xs hidden-sm">
+            <div class="row">
+                <div class="col-xs-6 col-md-4">
+                    <span class="bold">Day</span>
+                </div>
+                <div class="col-xs-6 col-md-4">
+                    <span class="bold">Date</span>
+                </div>
+                <div class="col-xs-6 col-md-4">
+                    <span class="bold">Production</span>
+                </div>
+            </div>
+        </div>
+        <!--Table Data-->
+        <div class="col-xs-12">
+            <div class="row row-list-item" ng-repeat="n in list" ng-click="ClickListItem(n, $index)" ng-class="{'selected':$index == selectedRow}">
+                <div class="hidden-md hidden-lg">
+                    <div class="col-xs-12 col-sm-6">
+                        <span class="bold">Date: </span>{{n.DateDayOfWeek}}
+                    </div>
+                    <div class="col-xs-12 col-sm-6">
+                        <span class="bold">Location: </span>{{n.Date}}
+                    </div>
+                    <div class="col-xs-12 col-sm-6">
+                        <span class="bold">Production: </span>{{n.Production}}
+                    </div>
+                </div>
+                <div class="hidden-xs hidden-sm">
+                    <div class="col-xs-6 col-md-4">
+                        {{n.DateDayOfWeek}}
+                    </div>
+                    <div class="col-xs-6 col-md-4">
+                        {{n.Date}}
+                    </div>
+                    <div class="col-xs-6 col-md-4">
+                        {{n.Production}}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!--Data Panel-->
+    <panel ng-model="dataPanel" title="View Report">
+        <div class="row form-group">
+            <!--Date Info-->
+            <div class="col-xs-12 col-sm-4 col-md-4">
+                <div class="">
+                    <label for="" class="NewTaskLabel">Date:</label>
+                    <span>{{selectedTask.Date}}</span>
+                </div>
+                <div class="">
+                    <label for="" class="NewTaskLabel">Date Created:</label>
+                    <span>{{selectedTask.DateCreated}}</span>
+                </div>
+            </div>
+            <!--Time / Car Num-->
+            <div class="col-xs-12 col-sm-4 col-md-4">
+                <div class="">
+                    <label for="" class="NewTaskLabel">Time:</label>
+                    <span>{{selectedTask.StartTime + " - " + selectedTask.EndTime}}</span>
+                </div>
+                <div class="">
+                    <label for="" class="NewTaskLabel">Car Number:</label>
+                    <span>{{selectedTask.CarNumber}}</span>
+                </div>
+            </div>
+            <!--Time / Car Number-->
+            <div class="col-xs-12 col-sm-4 col-md-4">
+                <div class="">
+                    <label for="" class="NewTaskLabel">New Location Options:</label>
+                    <span>{{selectedTask.Options}}</span>
+                </div>
+                <div class="">
+                    <label for="" class="NewTaskLabel">Locations Visited:</label>
+                    <span>{{selectedTask.Visited}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <!--Text Area Task-->
+            <div class="col-xs-11 col-sm-11 col-md-11 form-group">
+                <label for="" class="NewTaskLabel">Task:</label>
+                <textarea class="form-control NewTaskTextArea" disabled>{{selectedTask.DailyTask}}</textarea>
+            </div>
+        </div>
+        <!--Button Action-->
+        <div class="row">
+            <div class="col-xs-11 col-sm-3 col-sm-offset-8 col-md-2 col-md-offset-9 form-group">
+                <button class="btn btn-warning btn-block" ng-click="ResendReport()">
+                    <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+                    Resend
+                </button>
+            </div>
+        </div>
+    </panel>
+
+    <!--Draft Panel-->
+    <panel ng-model="draftPanel" title="My Drafts">
+        <table class="table">
+            <tr>
+                <th>Date</th>
+                <th>Task</th>
+            </tr>
+            <tr ng-repeat="n in draftList" ng-click="ClickDraftItem(n, $index)" class="NewTaskListItem">
+                <td>{{n.Date}}</td>
+                <td>{{n.DateDayOfWeek}}</td>
+            </tr>
+        </table>
+    </panel>
+
+    <!--New Task Panel-->
+    <panel ng-model="newTaskPanel" title="New Report">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="col-xs-12 col-sm-2">
+                    <div class="form-group">
+                        <label for="" class="NewTaskLabel">Date</label>
+                        <div class="inner-addon left-addon">
+                            <datepicker date-set="{{newTask.Date.toISOString().substring(0,10)}}" date-format="M/d/yy" date-max-limit="{{newTask.DateMax}}">
+                                <input type="text" ng-model="newTask.Date" class="form-control form-group" max="{{newTask.DateMax}}" />
+                            </datepicker>
+                            <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+                            <input class="form-control" style="height:0; opacity:0; margin-bottom:-30px;">@*<-Weird as heck bug. Don't remove unless you're removing Datepicker*@
+                        </div>
+                    </div>
+                </div>
+                <!--Start Time-->
+                <div class="col-xs-6 col-sm-2">
+                    <div class="form-group">
+                        <label for="" class="NewTaskLabel">Start Time</label>
+                        <input type="time" ng-model="newTask.StartTime" class="form-control" />
+                    </div>
+                </div>
+                <!--End Time-->
+                <div class="col-xs-6 col-sm-2">
+                    <div class="form-group">
+                        <label for="" class="NewTaskLabel">End Time</label>
+                        <input type="time" ng-model="newTask.EndTime" class="form-control" />
+                    </div>
+                </div>
+                <!--Car #-->
+                <div class="col-xs-6 col-sm-2">
+                    <div class="form-group">
+                        <label for="" class="NewTaskLabel">Assigned Car #</label>
+                        <input type="number" ng-model="newTask.CarNumber" class="form-control" min="0" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="col-xs-12">
+                    <label for="" class="NewTaskLabel">Tasks</label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="col-xs-12 col-sm-5 col-md-6">
+                    <div class="form-group">
+                        <textarea ng-model="newTask.DailyTask" rows="8" class="form-control NewTaskTextArea" placeholder="Today I..."></textarea>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-7 col-md-6 form-group">
+                    <div class="OptionPanel">
+                        <div class="row form-group">
+                            <div class="col-sm-8 col-md-8">
+                                <!--Options Yes\No-->
+                                <span class="control-label">New Location Option?</span>
+                                <div class="">
+                                    <input type="radio" ng-model="newTask.IsOptions" name="options" id="optionYes" ng-value="true" /><label for="optionYes">Yes</label>
+                                    <input type="radio" ng-model="newTask.IsOptions" name="options" id="optionNo" ng-value="false" ng-checked="true" /><label for="optionNo">No</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <!--Options Input-->
+                                <div class="col-sm-4 col-md-3">
+                                    <input type="number" ng-model="newTask.Options" class="form-control" ng-hide="!newTask.IsOptions" min="1" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <!--Visited Yes\No-->
+                            <div class="col-sm-8 col-md-8">
+                                <span class="control-label">Visited Locations?</span>
+                                <div class="">
+                                    <input type="radio" ng-model="newTask.IsVisited" name="locations" id="locationYes" ng-value="true" /><label for="locationYes">Yes</label>
+                                    <input type="radio" ng-model="newTask.IsVisited" name="locations" id="locationNo" ng-value="false" ng-checked="true" /><label for="locationNo">No</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <!--Visited Input-->
+                                <div class="col-sm-4 col-md-3">
+                                    <input type="number" ng-model="newTask.Visited" class="form-control" ng-hide="!newTask.IsVisited" nmin="1" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-sm-9">
+                <div class="col-xs-12 col-sm-4 col-md-2 form-group">
+                    <button ng-click="NewTaskSubmit(false)" class="btn btn-success btn-block">Submit</button>
+                </div>
+                <div class="col-xs-6 col-sm-4 col-md-2">
+                    <button ng-click="DraftSubmit()" class="btn btn-primary btn-block">Save Draft</button>
+                </div>
+            </div>
+            <div class="col-xs-6 col-sm-3 col-md-2">
+                <div class="col-xs-12 col-sm-10 col-sm-offset-2 col-md-10">
+                    <button ng-click="newTaskPanel.Close()" class="btn btn-danger btn-block">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </panel>
+
+</div>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="52e78aef91b048bd8343a040cf2d9ecf" Name="Diagram1" ZoomLevel="81">
+        <EntityTypeShape EntityType="ScoutSystem.Entities.UserInfo" Width="1.5" PointX="3.125" PointY="12.5" />
+        <EntityTypeShape EntityType="ScoutSystem.Entities.Production" Width="1.5" PointX="5.125" PointY="12" />
+        <AssociationConnector Association="ScoutSystem.Entities.FK_UserInfo_Production" />
+        <EntityTypeShape EntityType="ScoutSystem.Entities.ScoutDailyReport" Width="1.5" PointX="5.125" PointY="14.5" />
+        <AssociationConnector Association="ScoutSystem.Entities.FK_DailyEntry_Production" />
+        <EntityTypeShape EntityType="ScoutSystem.Entities.Attachment" Width="1.5" PointX="12.875" PointY="6.125" />
+        <EntityTypeShape EntityType="ScoutSystem.Entities.Category" Width="1.5" PointX="8.375" PointY="6.875" />
+        <EntityTypeShape EntityType="ScoutSystem.Entities.Contact" Width="1.5" PointX="12.875" PointY="10.75" />
+        <EntityTypeShape EntityType="ScoutSystem.Entities.DistributionList" Width="1.5" PointX="4.125" PointY="6.875" />
+        <EntityTypeShape EntityType="ScoutSystem.Entities.DistributionListCategory" Width="1.5" PointX="6" PointY="6.875" />
+        <EntityTypeShape EntityType="ScoutSystem.Entities.DistributionListProduction" Width="1.5" PointX="4.125" PointY="9.125" />
+        <EntityTypeShape EntityType="ScoutSystem.Entities.ExternalService" Width="1.5" PointX="12.625" PointY="14" />
+        <EntityTypeShape EntityType="ScoutSystem.Entities.IncidentReport" Width="1.5" PointX="10.875" PointY="7.125" />
+        <EntityTypeShape EntityType="ScoutSystem.Entities.IncidentReportMailingHistory" Width="1.5" PointX="12.875" PointY="8.375" />
+        <EntityTypeShape EntityType="ScoutSystem.Entities.Location" Width="1.5" PointX="10.875" PointY="10.375" />
+        <EntityTypeShape EntityType="ScoutSystem.Entities.LocationReport" Width="1.5" PointX="8.5" PointY="9.375" />
+        <EntityTypeShape EntityType="ScoutSystem.Entities.LocationReportExternalService" Width="1.5" PointX="10.875" PointY="13.75" />
+        <EntityTypeShape EntityType="ScoutSystem.Entities.Unit" Width="1.5" PointX="6.75" PointY="10" />
+        <AssociationConnector Association="ScoutSystem.Entities.FK_DistributionListProduction_Production" />
+        <AssociationConnector Association="ScoutSystem.Entities.FK_LocationReport_Prodiction" />
+        <AssociationConnector Association="ScoutSystem.Entities.FK_Attachment_IncidentReport" />
+        <AssociationConnector Association="ScoutSystem.Entities.FK_DistributionListCategory_Category" />
+        <AssociationConnector Association="ScoutSystem.Entities.FK_IncidentReport_CategoryID" />
+        <AssociationConnector Association="ScoutSystem.Entities.FK_Location_Contact" />
+        <AssociationConnector Association="ScoutSystem.Entities.FK_DistributionListCategory_DistributionList" />
+        <AssociationConnector Association="ScoutSystem.Entities.FK_DistributionListProduction_DistributionList" />
+        <AssociationConnector Association="ScoutSystem.Entities.FK_LocalReportExternalService_ExternalService_ExternalServiceID" />
+        <AssociationConnector Association="ScoutSystem.Entities.FK_IncidentReport_LocationReport" />
+        <AssociationConnector Association="ScoutSystem.Entities.FK_MailingHistory_IncidentReport" />
+        <AssociationConnector Association="ScoutSystem.Entities.FK_LocationReport_Location" />
+        <AssociationConnector Association="ScoutSystem.Entities.FK_LocationReport_Unit" />
+        <AssociationConnector Association="ScoutSystem.Entities.FK_LocationReportExternalService_LocationReport_LocationReportID" />
+        <AssociationConnector Association="ScoutSystem.Entities.FK_DistributionList_User" />
+        <AssociationConnector Association="ScoutSystem.Entities.FK_LocationReport_User" />
+        <AssociationConnector Association="ScoutSystem.Entities.FK_MailingHistory_User" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

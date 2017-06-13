@@ -1,0 +1,1233 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ScoutSystem.Entities.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Production">
+          <Key>
+            <PropertyRef Name="ProductionID" />
+          </Key>
+          <Property Name="ProductionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserInfo">
+          <Key>
+            <PropertyRef Name="AspUserID" />
+          </Key>
+          <Property Name="AspUserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ProductionID" Type="int" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="SSO" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Attachment">
+          <Key>
+            <PropertyRef Name="AttachmentID" />
+          </Key>
+          <Property Name="AttachmentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IncidentReportID" Type="int" Nullable="false" />
+          <Property Name="File" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Contact">
+          <Key>
+            <PropertyRef Name="ContactID" />
+          </Key>
+          <Property Name="ContactID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DistributionList">
+          <Key>
+            <PropertyRef Name="DistributionListID" />
+          </Key>
+          <Property Name="DistributionListID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AspUserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Primary" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DistributionListCategory">
+          <Key>
+            <PropertyRef Name="DistributionListCategoryID" />
+          </Key>
+          <Property Name="DistributionListCategoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DistributionListID" Type="int" Nullable="false" />
+          <Property Name="CategoryID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DistributionListProduction">
+          <Key>
+            <PropertyRef Name="DistributionListProductionID" />
+          </Key>
+          <Property Name="DistributionListProductionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DistributionListID" Type="int" Nullable="false" />
+          <Property Name="ProductionID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ExternalService">
+          <Key>
+            <PropertyRef Name="ExternalServiceID" />
+          </Key>
+          <Property Name="ExternalServiceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="IncidentReport">
+          <Key>
+            <PropertyRef Name="IncidentReportID" />
+          </Key>
+          <Property Name="IncidentReportID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LocationReportID" Type="int" Nullable="false" />
+          <Property Name="CategoryID" Type="int" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" StoreGeneratedPattern="Computed" />
+          <Property Name="Notes" Type="text" Nullable="false" />
+        </EntityType>
+        <EntityType Name="IncidentReportMailingHistory">
+          <Key>
+            <PropertyRef Name="IncidentReportMailingHistoryID" />
+          </Key>
+          <Property Name="IncidentReportMailingHistoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IncidentReportID" Type="int" Nullable="false" />
+          <Property Name="AspUserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="LocationID" />
+          </Key>
+          <Property Name="LocationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ContactID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LocationReport">
+          <Key>
+            <PropertyRef Name="LocationReportID" />
+          </Key>
+          <Property Name="LocationReportID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LocationID" Type="int" Nullable="false" />
+          <Property Name="ProductionID" Type="int" Nullable="false" />
+          <Property Name="UnitID" Type="smallint" Nullable="false" />
+          <Property Name="AspUserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="SiteStart" Type="time" Precision="0" Nullable="false" />
+          <Property Name="SiteEnd" Type="time" Precision="0" Nullable="false" />
+          <Property Name="ProductionStart" Type="time" Precision="0" Nullable="false" />
+          <Property Name="CateringArrival" Type="time" Precision="0" Nullable="false" />
+          <Property Name="CateringEnd" Type="time" Precision="0" Nullable="false" />
+          <Property Name="PoliceArrival" Type="time" Precision="0" Nullable="false" />
+          <Property Name="PoliceShift" Type="time" Precision="0" Nullable="false" />
+          <Property Name="PoliceEnd" Type="time" Precision="0" Nullable="false" />
+          <Property Name="CleaningCrewArrival" Type="time" Precision="0" Nullable="false" />
+          <Property Name="CleaningCrewEnd" Type="time" Precision="0" Nullable="false" />
+          <Property Name="ProductionLunch" Type="time" Precision="0" Nullable="false" />
+          <Property Name="ProductionLunchEnd" Type="time" Precision="0" Nullable="false" />
+          <Property Name="DinnerBreak" Type="time" Precision="0" Nullable="false" />
+          <Property Name="DinnerBreakEnd" Type="time" Precision="0" Nullable="false" />
+          <Property Name="ProductionEnd" Type="time" Precision="0" Nullable="false" />
+          <Property Name="LastVehicle" Type="time" Precision="0" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" StoreGeneratedPattern="Computed" />
+          <Property Name="Comments" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LocationReportExternalService">
+          <Key>
+            <PropertyRef Name="LocationReportExternalServiceID" />
+          </Key>
+          <Property Name="LocationReportExternalServiceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LocationReportID" Type="int" Nullable="false" />
+          <Property Name="ExternalServiceID" Type="int" Nullable="false" />
+          <Property Name="StartTime" Type="time" Precision="0" Nullable="false" />
+          <Property Name="EndTime" Type="time" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Unit">
+          <Key>
+            <PropertyRef Name="UnitID" />
+          </Key>
+          <Property Name="UnitID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ScoutDailyReport">
+          <Key>
+            <PropertyRef Name="EntryID" />
+          </Key>
+          <Property Name="EntryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ProductionID" Type="int" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" StoreGeneratedPattern="Computed" />
+          <Property Name="Task" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CarNumber" Type="int" Nullable="false" />
+          <Property Name="LocationsVisited" Type="int" Nullable="false" />
+          <Property Name="LocationOptions" Type="int" Nullable="false" />
+          <Property Name="StartTime" Type="datetime" Nullable="false" />
+          <Property Name="EndTime" Type="datetime" Nullable="false" />
+          <Property Name="IsDraft" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Attachment_IncidentReport">
+          <End Role="IncidentReport" Type="Self.IncidentReport" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Attachment" Type="Self.Attachment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IncidentReport">
+              <PropertyRef Name="IncidentReportID" />
+            </Principal>
+            <Dependent Role="Attachment">
+              <PropertyRef Name="IncidentReportID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DailyEntry_Production">
+          <End Role="Production" Type="Self.Production" Multiplicity="1" />
+          <End Role="ScoutDailyReport" Type="Self.ScoutDailyReport" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Production">
+              <PropertyRef Name="ProductionID" />
+            </Principal>
+            <Dependent Role="ScoutDailyReport">
+              <PropertyRef Name="ProductionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DistributionList_User">
+          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="1" />
+          <End Role="DistributionList" Type="Self.DistributionList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="AspUserID" />
+            </Principal>
+            <Dependent Role="DistributionList">
+              <PropertyRef Name="AspUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DistributionListCategory_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="DistributionListCategory" Type="Self.DistributionListCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="DistributionListCategory">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DistributionListCategory_DistributionList">
+          <End Role="DistributionList" Type="Self.DistributionList" Multiplicity="1" />
+          <End Role="DistributionListCategory" Type="Self.DistributionListCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DistributionList">
+              <PropertyRef Name="DistributionListID" />
+            </Principal>
+            <Dependent Role="DistributionListCategory">
+              <PropertyRef Name="DistributionListID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DistributionListProduction_DistributionList">
+          <End Role="DistributionList" Type="Self.DistributionList" Multiplicity="1" />
+          <End Role="DistributionListProduction" Type="Self.DistributionListProduction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DistributionList">
+              <PropertyRef Name="DistributionListID" />
+            </Principal>
+            <Dependent Role="DistributionListProduction">
+              <PropertyRef Name="DistributionListID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DistributionListProduction_Production">
+          <End Role="Production" Type="Self.Production" Multiplicity="1" />
+          <End Role="DistributionListProduction" Type="Self.DistributionListProduction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Production">
+              <PropertyRef Name="ProductionID" />
+            </Principal>
+            <Dependent Role="DistributionListProduction">
+              <PropertyRef Name="ProductionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IncidentReport_CategoryID">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="IncidentReport" Type="Self.IncidentReport" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="IncidentReport">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IncidentReport_LocationReport">
+          <End Role="LocationReport" Type="Self.LocationReport" Multiplicity="1" />
+          <End Role="IncidentReport" Type="Self.IncidentReport" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LocationReport">
+              <PropertyRef Name="LocationReportID" />
+            </Principal>
+            <Dependent Role="IncidentReport">
+              <PropertyRef Name="LocationReportID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LocalReportExternalService_ExternalService_ExternalServiceID">
+          <End Role="ExternalService" Type="Self.ExternalService" Multiplicity="1" />
+          <End Role="LocationReportExternalService" Type="Self.LocationReportExternalService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ExternalService">
+              <PropertyRef Name="ExternalServiceID" />
+            </Principal>
+            <Dependent Role="LocationReportExternalService">
+              <PropertyRef Name="ExternalServiceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Location_Contact">
+          <End Role="Contact" Type="Self.Contact" Multiplicity="1" />
+          <End Role="Location" Type="Self.Location" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contact">
+              <PropertyRef Name="ContactID" />
+            </Principal>
+            <Dependent Role="Location">
+              <PropertyRef Name="ContactID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LocationReport_Location">
+          <End Role="Location" Type="Self.Location" Multiplicity="1" />
+          <End Role="LocationReport" Type="Self.LocationReport" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="LocationID" />
+            </Principal>
+            <Dependent Role="LocationReport">
+              <PropertyRef Name="LocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LocationReport_Prodiction">
+          <End Role="Production" Type="Self.Production" Multiplicity="1" />
+          <End Role="LocationReport" Type="Self.LocationReport" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Production">
+              <PropertyRef Name="ProductionID" />
+            </Principal>
+            <Dependent Role="LocationReport">
+              <PropertyRef Name="ProductionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LocationReport_Unit">
+          <End Role="Unit" Type="Self.Unit" Multiplicity="1" />
+          <End Role="LocationReport" Type="Self.LocationReport" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Unit">
+              <PropertyRef Name="UnitID" />
+            </Principal>
+            <Dependent Role="LocationReport">
+              <PropertyRef Name="UnitID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LocationReport_User">
+          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="1" />
+          <End Role="LocationReport" Type="Self.LocationReport" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="AspUserID" />
+            </Principal>
+            <Dependent Role="LocationReport">
+              <PropertyRef Name="AspUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LocationReportExternalService_LocationReport_LocationReportID">
+          <End Role="LocationReport" Type="Self.LocationReport" Multiplicity="1" />
+          <End Role="LocationReportExternalService" Type="Self.LocationReportExternalService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LocationReport">
+              <PropertyRef Name="LocationReportID" />
+            </Principal>
+            <Dependent Role="LocationReportExternalService">
+              <PropertyRef Name="LocationReportID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MailingHistory_IncidentReport">
+          <End Role="IncidentReport" Type="Self.IncidentReport" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="IncidentReportMailingHistory" Type="Self.IncidentReportMailingHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IncidentReport">
+              <PropertyRef Name="IncidentReportID" />
+            </Principal>
+            <Dependent Role="IncidentReportMailingHistory">
+              <PropertyRef Name="IncidentReportID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MailingHistory_User">
+          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="1" />
+          <End Role="IncidentReportMailingHistory" Type="Self.IncidentReportMailingHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="AspUserID" />
+            </Principal>
+            <Dependent Role="IncidentReportMailingHistory">
+              <PropertyRef Name="AspUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserInfo_Production">
+          <End Role="Production" Type="Self.Production" Multiplicity="1" />
+          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Production">
+              <PropertyRef Name="ProductionID" />
+            </Principal>
+            <Dependent Role="UserInfo">
+              <PropertyRef Name="ProductionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ScoutSystemEntitiesStoreContainer">
+          <EntitySet Name="Production" EntityType="Self.Production" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserInfo" EntityType="Self.UserInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Attachment" EntityType="Self.Attachment" Schema="onsite" store:Type="Tables" />
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="onsite" store:Type="Tables" />
+          <EntitySet Name="Contact" EntityType="Self.Contact" Schema="onsite" store:Type="Tables" />
+          <EntitySet Name="DistributionList" EntityType="Self.DistributionList" Schema="onsite" store:Type="Tables" />
+          <EntitySet Name="DistributionListCategory" EntityType="Self.DistributionListCategory" Schema="onsite" store:Type="Tables" />
+          <EntitySet Name="DistributionListProduction" EntityType="Self.DistributionListProduction" Schema="onsite" store:Type="Tables" />
+          <EntitySet Name="ExternalService" EntityType="Self.ExternalService" Schema="onsite" store:Type="Tables" />
+          <EntitySet Name="IncidentReport" EntityType="Self.IncidentReport" Schema="onsite" store:Type="Tables" />
+          <EntitySet Name="IncidentReportMailingHistory" EntityType="Self.IncidentReportMailingHistory" Schema="onsite" store:Type="Tables" />
+          <EntitySet Name="Location" EntityType="Self.Location" Schema="onsite" store:Type="Tables" />
+          <EntitySet Name="LocationReport" EntityType="Self.LocationReport" Schema="onsite" store:Type="Tables" />
+          <EntitySet Name="LocationReportExternalService" EntityType="Self.LocationReportExternalService" Schema="onsite" store:Type="Tables" />
+          <EntitySet Name="Unit" EntityType="Self.Unit" Schema="onsite" store:Type="Tables" />
+          <EntitySet Name="ScoutDailyReport" EntityType="Self.ScoutDailyReport" Schema="scout" store:Type="Tables" />
+          <AssociationSet Name="FK_Attachment_IncidentReport" Association="Self.FK_Attachment_IncidentReport">
+            <End Role="IncidentReport" EntitySet="IncidentReport" />
+            <End Role="Attachment" EntitySet="Attachment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DailyEntry_Production" Association="Self.FK_DailyEntry_Production">
+            <End Role="Production" EntitySet="Production" />
+            <End Role="ScoutDailyReport" EntitySet="ScoutDailyReport" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DistributionList_User" Association="Self.FK_DistributionList_User">
+            <End Role="UserInfo" EntitySet="UserInfo" />
+            <End Role="DistributionList" EntitySet="DistributionList" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DistributionListCategory_Category" Association="Self.FK_DistributionListCategory_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="DistributionListCategory" EntitySet="DistributionListCategory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DistributionListCategory_DistributionList" Association="Self.FK_DistributionListCategory_DistributionList">
+            <End Role="DistributionList" EntitySet="DistributionList" />
+            <End Role="DistributionListCategory" EntitySet="DistributionListCategory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DistributionListProduction_DistributionList" Association="Self.FK_DistributionListProduction_DistributionList">
+            <End Role="DistributionList" EntitySet="DistributionList" />
+            <End Role="DistributionListProduction" EntitySet="DistributionListProduction" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DistributionListProduction_Production" Association="Self.FK_DistributionListProduction_Production">
+            <End Role="Production" EntitySet="Production" />
+            <End Role="DistributionListProduction" EntitySet="DistributionListProduction" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IncidentReport_CategoryID" Association="Self.FK_IncidentReport_CategoryID">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="IncidentReport" EntitySet="IncidentReport" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IncidentReport_LocationReport" Association="Self.FK_IncidentReport_LocationReport">
+            <End Role="LocationReport" EntitySet="LocationReport" />
+            <End Role="IncidentReport" EntitySet="IncidentReport" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LocalReportExternalService_ExternalService_ExternalServiceID" Association="Self.FK_LocalReportExternalService_ExternalService_ExternalServiceID">
+            <End Role="ExternalService" EntitySet="ExternalService" />
+            <End Role="LocationReportExternalService" EntitySet="LocationReportExternalService" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Location_Contact" Association="Self.FK_Location_Contact">
+            <End Role="Contact" EntitySet="Contact" />
+            <End Role="Location" EntitySet="Location" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LocationReport_Location" Association="Self.FK_LocationReport_Location">
+            <End Role="Location" EntitySet="Location" />
+            <End Role="LocationReport" EntitySet="LocationReport" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LocationReport_Prodiction" Association="Self.FK_LocationReport_Prodiction">
+            <End Role="Production" EntitySet="Production" />
+            <End Role="LocationReport" EntitySet="LocationReport" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LocationReport_Unit" Association="Self.FK_LocationReport_Unit">
+            <End Role="Unit" EntitySet="Unit" />
+            <End Role="LocationReport" EntitySet="LocationReport" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LocationReport_User" Association="Self.FK_LocationReport_User">
+            <End Role="UserInfo" EntitySet="UserInfo" />
+            <End Role="LocationReport" EntitySet="LocationReport" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LocationReportExternalService_LocationReport_LocationReportID" Association="Self.FK_LocationReportExternalService_LocationReport_LocationReportID">
+            <End Role="LocationReport" EntitySet="LocationReport" />
+            <End Role="LocationReportExternalService" EntitySet="LocationReportExternalService" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MailingHistory_IncidentReport" Association="Self.FK_MailingHistory_IncidentReport">
+            <End Role="IncidentReport" EntitySet="IncidentReport" />
+            <End Role="IncidentReportMailingHistory" EntitySet="IncidentReportMailingHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MailingHistory_User" Association="Self.FK_MailingHistory_User">
+            <End Role="UserInfo" EntitySet="UserInfo" />
+            <End Role="IncidentReportMailingHistory" EntitySet="IncidentReportMailingHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserInfo_Production" Association="Self.FK_UserInfo_Production">
+            <End Role="Production" EntitySet="Production" />
+            <End Role="UserInfo" EntitySet="UserInfo" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ScoutSystem.Entities" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="ScoutSystemDevEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="UserInfo" EntityType="ScoutSystem.Entities.UserInfo" />
+          <EntitySet Name="Production" EntityType="ScoutSystem.Entities.Production" />
+          <AssociationSet Name="FK_UserInfo_Production" Association="ScoutSystem.Entities.FK_UserInfo_Production">
+            <End Role="Production" EntitySet="Production" />
+            <End Role="UserInfo" EntitySet="UserInfo" />
+          </AssociationSet>
+          <EntitySet Name="ScoutDailyReport" EntityType="ScoutSystem.Entities.ScoutDailyReport" />
+          <AssociationSet Name="FK_DailyEntry_Production" Association="ScoutSystem.Entities.FK_DailyEntry_Production">
+            <End Role="Production" EntitySet="Production" />
+            <End Role="ScoutDailyReport" EntitySet="ScoutDailyReport" />
+          </AssociationSet>
+          <EntitySet Name="Attachment" EntityType="ScoutSystem.Entities.Attachment" />
+          <EntitySet Name="Category" EntityType="ScoutSystem.Entities.Category" />
+          <EntitySet Name="Contact" EntityType="ScoutSystem.Entities.Contact" />
+          <EntitySet Name="DistributionList" EntityType="ScoutSystem.Entities.DistributionList" />
+          <EntitySet Name="DistributionListCategory" EntityType="ScoutSystem.Entities.DistributionListCategory" />
+          <EntitySet Name="DistributionListProduction" EntityType="ScoutSystem.Entities.DistributionListProduction" />
+          <EntitySet Name="ExternalService" EntityType="ScoutSystem.Entities.ExternalService" />
+          <EntitySet Name="IncidentReport" EntityType="ScoutSystem.Entities.IncidentReport" />
+          <EntitySet Name="IncidentReportMailingHistory" EntityType="ScoutSystem.Entities.IncidentReportMailingHistory" />
+          <EntitySet Name="Location" EntityType="ScoutSystem.Entities.Location" />
+          <EntitySet Name="LocationReport" EntityType="ScoutSystem.Entities.LocationReport" />
+          <EntitySet Name="LocationReportExternalService" EntityType="ScoutSystem.Entities.LocationReportExternalService" />
+          <EntitySet Name="Unit" EntityType="ScoutSystem.Entities.Unit" />
+          <AssociationSet Name="FK_DistributionListProduction_Production" Association="ScoutSystem.Entities.FK_DistributionListProduction_Production">
+            <End Role="Production" EntitySet="Production" />
+            <End Role="DistributionListProduction" EntitySet="DistributionListProduction" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LocationReport_Prodiction" Association="ScoutSystem.Entities.FK_LocationReport_Prodiction">
+            <End Role="Production" EntitySet="Production" />
+            <End Role="LocationReport" EntitySet="LocationReport" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Attachment_IncidentReport" Association="ScoutSystem.Entities.FK_Attachment_IncidentReport">
+            <End Role="IncidentReport" EntitySet="IncidentReport" />
+            <End Role="Attachment" EntitySet="Attachment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DistributionListCategory_Category" Association="ScoutSystem.Entities.FK_DistributionListCategory_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="DistributionListCategory" EntitySet="DistributionListCategory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IncidentReport_CategoryID" Association="ScoutSystem.Entities.FK_IncidentReport_CategoryID">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="IncidentReport" EntitySet="IncidentReport" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Location_Contact" Association="ScoutSystem.Entities.FK_Location_Contact">
+            <End Role="Contact" EntitySet="Contact" />
+            <End Role="Location" EntitySet="Location" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DistributionListCategory_DistributionList" Association="ScoutSystem.Entities.FK_DistributionListCategory_DistributionList">
+            <End Role="DistributionList" EntitySet="DistributionList" />
+            <End Role="DistributionListCategory" EntitySet="DistributionListCategory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DistributionListProduction_DistributionList" Association="ScoutSystem.Entities.FK_DistributionListProduction_DistributionList">
+            <End Role="DistributionList" EntitySet="DistributionList" />
+            <End Role="DistributionListProduction" EntitySet="DistributionListProduction" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LocalReportExternalService_ExternalService_ExternalServiceID" Association="ScoutSystem.Entities.FK_LocalReportExternalService_ExternalService_ExternalServiceID">
+            <End Role="ExternalService" EntitySet="ExternalService" />
+            <End Role="LocationReportExternalService" EntitySet="LocationReportExternalService" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IncidentReport_LocationReport" Association="ScoutSystem.Entities.FK_IncidentReport_LocationReport">
+            <End Role="LocationReport" EntitySet="LocationReport" />
+            <End Role="IncidentReport" EntitySet="IncidentReport" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MailingHistory_IncidentReport" Association="ScoutSystem.Entities.FK_MailingHistory_IncidentReport">
+            <End Role="IncidentReport" EntitySet="IncidentReport" />
+            <End Role="IncidentReportMailingHistory" EntitySet="IncidentReportMailingHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LocationReport_Location" Association="ScoutSystem.Entities.FK_LocationReport_Location">
+            <End Role="Location" EntitySet="Location" />
+            <End Role="LocationReport" EntitySet="LocationReport" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LocationReport_Unit" Association="ScoutSystem.Entities.FK_LocationReport_Unit">
+            <End Role="Unit" EntitySet="Unit" />
+            <End Role="LocationReport" EntitySet="LocationReport" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LocationReportExternalService_LocationReport_LocationReportID" Association="ScoutSystem.Entities.FK_LocationReportExternalService_LocationReport_LocationReportID">
+            <End Role="LocationReport" EntitySet="LocationReport" />
+            <End Role="LocationReportExternalService" EntitySet="LocationReportExternalService" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DistributionList_User" Association="ScoutSystem.Entities.FK_DistributionList_User">
+            <End Role="UserInfo" EntitySet="UserInfo" />
+            <End Role="DistributionList" EntitySet="DistributionList" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LocationReport_User" Association="ScoutSystem.Entities.FK_LocationReport_User">
+            <End Role="UserInfo" EntitySet="UserInfo" />
+            <End Role="LocationReport" EntitySet="LocationReport" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MailingHistory_User" Association="ScoutSystem.Entities.FK_MailingHistory_User">
+            <End Role="UserInfo" EntitySet="UserInfo" />
+            <End Role="IncidentReportMailingHistory" EntitySet="IncidentReportMailingHistory" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="UserInfo">
+          <Key>
+            <PropertyRef Name="AspUserID" />
+          </Key>
+          <Property Name="ProductionID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Production" Relationship="ScoutSystem.Entities.FK_UserInfo_Production" FromRole="UserInfo" ToRole="Production" />
+          <Property Name="AspUserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" annotation:StoreGeneratedPattern="None" />
+          <NavigationProperty Name="DistributionList" Relationship="ScoutSystem.Entities.FK_DistributionList_User" FromRole="UserInfo" ToRole="DistributionList" />
+          <NavigationProperty Name="LocationReport" Relationship="ScoutSystem.Entities.FK_LocationReport_User" FromRole="UserInfo" ToRole="LocationReport" />
+          <NavigationProperty Name="IncidentReportMailingHistory" Relationship="ScoutSystem.Entities.FK_MailingHistory_User" FromRole="UserInfo" ToRole="IncidentReportMailingHistory" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="SSO" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Production">
+          <Key>
+            <PropertyRef Name="ProductionID" />
+          </Key>
+          <Property Name="ProductionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="UserInfo" Relationship="ScoutSystem.Entities.FK_UserInfo_Production" FromRole="Production" ToRole="UserInfo" />
+          <NavigationProperty Name="ScoutDailyReport" Relationship="ScoutSystem.Entities.FK_DailyEntry_Production" FromRole="Production" ToRole="ScoutDailyReport" />
+          <NavigationProperty Name="DistributionListProduction" Relationship="ScoutSystem.Entities.FK_DistributionListProduction_Production" FromRole="Production" ToRole="DistributionListProduction" />
+          <NavigationProperty Name="LocationReport" Relationship="ScoutSystem.Entities.FK_LocationReport_Prodiction" FromRole="Production" ToRole="LocationReport" />
+        </EntityType>
+        <Association Name="FK_UserInfo_Production">
+          <End Type="ScoutSystem.Entities.Production" Role="Production" Multiplicity="1" />
+          <End Type="ScoutSystem.Entities.UserInfo" Role="UserInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Production">
+              <PropertyRef Name="ProductionID" />
+            </Principal>
+            <Dependent Role="UserInfo">
+              <PropertyRef Name="ProductionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ScoutDailyReport">
+          <Key>
+            <PropertyRef Name="EntryID" />
+          </Key>
+          <Property Name="EntryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ProductionID" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="Task" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CarNumber" Type="Int32" Nullable="false" />
+          <Property Name="LocationsVisited" Type="Int32" Nullable="false" />
+          <Property Name="LocationOptions" Type="Int32" Nullable="false" />
+          <Property Name="StartTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsDraft" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Production" Relationship="ScoutSystem.Entities.FK_DailyEntry_Production" FromRole="ScoutDailyReport" ToRole="Production" />
+        </EntityType>
+        <Association Name="FK_DailyEntry_Production">
+          <End Type="ScoutSystem.Entities.Production" Role="Production" Multiplicity="1" />
+          <End Type="ScoutSystem.Entities.ScoutDailyReport" Role="ScoutDailyReport" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Production">
+              <PropertyRef Name="ProductionID" />
+            </Principal>
+            <Dependent Role="ScoutDailyReport">
+              <PropertyRef Name="ProductionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Attachment">
+          <Key>
+            <PropertyRef Name="AttachmentID" />
+          </Key>
+          <Property Name="AttachmentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IncidentReportID" Type="Int32" Nullable="false" />
+          <Property Name="File" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="IncidentReport" Relationship="ScoutSystem.Entities.FK_Attachment_IncidentReport" FromRole="Attachment" ToRole="IncidentReport" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DistributionListCategory" Relationship="ScoutSystem.Entities.FK_DistributionListCategory_Category" FromRole="Category" ToRole="DistributionListCategory" />
+          <NavigationProperty Name="IncidentReport" Relationship="ScoutSystem.Entities.FK_IncidentReport_CategoryID" FromRole="Category" ToRole="IncidentReport" />
+        </EntityType>
+        <EntityType Name="Contact">
+          <Key>
+            <PropertyRef Name="ContactID" />
+          </Key>
+          <Property Name="ContactID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Location" Relationship="ScoutSystem.Entities.FK_Location_Contact" FromRole="Contact" ToRole="Location" />
+        </EntityType>
+        <EntityType Name="DistributionList">
+          <Key>
+            <PropertyRef Name="DistributionListID" />
+          </Key>
+          <Property Name="DistributionListID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Primary" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="DistributionListCategory" Relationship="ScoutSystem.Entities.FK_DistributionListCategory_DistributionList" FromRole="DistributionList" ToRole="DistributionListCategory" />
+          <NavigationProperty Name="DistributionListProduction" Relationship="ScoutSystem.Entities.FK_DistributionListProduction_DistributionList" FromRole="DistributionList" ToRole="DistributionListProduction" />
+          <Property Name="AspUserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="UserInfo" Relationship="ScoutSystem.Entities.FK_DistributionList_User" FromRole="DistributionList" ToRole="UserInfo" />
+        </EntityType>
+        <EntityType Name="DistributionListCategory">
+          <Key>
+            <PropertyRef Name="DistributionListCategoryID" />
+          </Key>
+          <Property Name="DistributionListCategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DistributionListID" Type="Int32" Nullable="false" />
+          <Property Name="CategoryID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Category" Relationship="ScoutSystem.Entities.FK_DistributionListCategory_Category" FromRole="DistributionListCategory" ToRole="Category" />
+          <NavigationProperty Name="DistributionList" Relationship="ScoutSystem.Entities.FK_DistributionListCategory_DistributionList" FromRole="DistributionListCategory" ToRole="DistributionList" />
+        </EntityType>
+        <EntityType Name="DistributionListProduction">
+          <Key>
+            <PropertyRef Name="DistributionListProductionID" />
+          </Key>
+          <Property Name="DistributionListProductionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DistributionListID" Type="Int32" Nullable="false" />
+          <Property Name="ProductionID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Production" Relationship="ScoutSystem.Entities.FK_DistributionListProduction_Production" FromRole="DistributionListProduction" ToRole="Production" />
+          <NavigationProperty Name="DistributionList" Relationship="ScoutSystem.Entities.FK_DistributionListProduction_DistributionList" FromRole="DistributionListProduction" ToRole="DistributionList" />
+        </EntityType>
+        <EntityType Name="ExternalService">
+          <Key>
+            <PropertyRef Name="ExternalServiceID" />
+          </Key>
+          <Property Name="ExternalServiceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="LocationReportExternalService" Relationship="ScoutSystem.Entities.FK_LocalReportExternalService_ExternalService_ExternalServiceID" FromRole="ExternalService" ToRole="LocationReportExternalService" />
+        </EntityType>
+        <EntityType Name="IncidentReport">
+          <Key>
+            <PropertyRef Name="IncidentReportID" />
+          </Key>
+          <Property Name="IncidentReportID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LocationReportID" Type="Int32" Nullable="false" />
+          <Property Name="CategoryID" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="Notes" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Attachment" Relationship="ScoutSystem.Entities.FK_Attachment_IncidentReport" FromRole="IncidentReport" ToRole="Attachment" />
+          <NavigationProperty Name="Category" Relationship="ScoutSystem.Entities.FK_IncidentReport_CategoryID" FromRole="IncidentReport" ToRole="Category" />
+          <NavigationProperty Name="LocationReport" Relationship="ScoutSystem.Entities.FK_IncidentReport_LocationReport" FromRole="IncidentReport" ToRole="LocationReport" />
+          <NavigationProperty Name="IncidentReportMailingHistory" Relationship="ScoutSystem.Entities.FK_MailingHistory_IncidentReport" FromRole="IncidentReport" ToRole="IncidentReportMailingHistory" />
+        </EntityType>
+        <EntityType Name="IncidentReportMailingHistory">
+          <Key>
+            <PropertyRef Name="IncidentReportMailingHistoryID" />
+          </Key>
+          <Property Name="IncidentReportMailingHistoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IncidentReportID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="IncidentReport" Relationship="ScoutSystem.Entities.FK_MailingHistory_IncidentReport" FromRole="IncidentReportMailingHistory" ToRole="IncidentReport" />
+          <Property Name="AspUserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="UserInfo" Relationship="ScoutSystem.Entities.FK_MailingHistory_User" FromRole="IncidentReportMailingHistory" ToRole="UserInfo" />
+        </EntityType>
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="LocationID" />
+          </Key>
+          <Property Name="LocationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ContactID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Contact" Relationship="ScoutSystem.Entities.FK_Location_Contact" FromRole="Location" ToRole="Contact" />
+          <NavigationProperty Name="LocationReport" Relationship="ScoutSystem.Entities.FK_LocationReport_Location" FromRole="Location" ToRole="LocationReport" />
+        </EntityType>
+        <EntityType Name="LocationReport">
+          <Key>
+            <PropertyRef Name="LocationReportID" />
+          </Key>
+          <Property Name="LocationReportID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LocationID" Type="Int32" Nullable="false" />
+          <Property Name="ProductionID" Type="Int32" Nullable="false" />
+          <Property Name="UnitID" Type="Int16" Nullable="false" />
+          <Property Name="SiteStart" Type="Time" Nullable="false" Precision="0" />
+          <Property Name="SiteEnd" Type="Time" Nullable="false" Precision="0" />
+          <Property Name="ProductionStart" Type="Time" Nullable="false" Precision="0" />
+          <Property Name="CateringArrival" Type="Time" Nullable="false" Precision="0" />
+          <Property Name="CateringEnd" Type="Time" Nullable="false" Precision="0" />
+          <Property Name="PoliceArrival" Type="Time" Nullable="false" Precision="0" />
+          <Property Name="PoliceShift" Type="Time" Nullable="false" Precision="0" />
+          <Property Name="PoliceEnd" Type="Time" Nullable="false" Precision="0" />
+          <Property Name="CleaningCrewArrival" Type="Time" Nullable="false" Precision="0" />
+          <Property Name="CleaningCrewEnd" Type="Time" Nullable="false" Precision="0" />
+          <Property Name="ProductionLunch" Type="Time" Nullable="false" Precision="0" />
+          <Property Name="ProductionLunchEnd" Type="Time" Nullable="false" Precision="0" />
+          <Property Name="DinnerBreak" Type="Time" Nullable="false" Precision="0" />
+          <Property Name="DinnerBreakEnd" Type="Time" Nullable="false" Precision="0" />
+          <Property Name="ProductionEnd" Type="Time" Nullable="false" Precision="0" />
+          <Property Name="LastVehicle" Type="Time" Nullable="false" Precision="0" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="Comments" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Production" Relationship="ScoutSystem.Entities.FK_LocationReport_Prodiction" FromRole="LocationReport" ToRole="Production" />
+          <NavigationProperty Name="IncidentReport" Relationship="ScoutSystem.Entities.FK_IncidentReport_LocationReport" FromRole="LocationReport" ToRole="IncidentReport" />
+          <NavigationProperty Name="Location" Relationship="ScoutSystem.Entities.FK_LocationReport_Location" FromRole="LocationReport" ToRole="Location" />
+          <NavigationProperty Name="Unit" Relationship="ScoutSystem.Entities.FK_LocationReport_Unit" FromRole="LocationReport" ToRole="Unit" />
+          <NavigationProperty Name="LocationReportExternalService" Relationship="ScoutSystem.Entities.FK_LocationReportExternalService_LocationReport_LocationReportID" FromRole="LocationReport" ToRole="LocationReportExternalService" />
+          <Property Name="AspUserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="UserInfo" Relationship="ScoutSystem.Entities.FK_LocationReport_User" FromRole="LocationReport" ToRole="UserInfo" />
+        </EntityType>
+        <EntityType Name="LocationReportExternalService">
+          <Key>
+            <PropertyRef Name="LocationReportExternalServiceID" />
+          </Key>
+          <Property Name="LocationReportExternalServiceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LocationReportID" Type="Int32" Nullable="false" />
+          <Property Name="ExternalServiceID" Type="Int32" Nullable="false" />
+          <Property Name="StartTime" Type="Time" Nullable="false" Precision="0" />
+          <Property Name="EndTime" Type="Time" Nullable="false" Precision="0" />
+          <NavigationProperty Name="ExternalService" Relationship="ScoutSystem.Entities.FK_LocalReportExternalService_ExternalService_ExternalServiceID" FromRole="LocationReportExternalService" ToRole="ExternalService" />
+          <NavigationProperty Name="LocationReport" Relationship="ScoutSystem.Entities.FK_LocationReportExternalService_LocationReport_LocationReportID" FromRole="LocationReportExternalService" ToRole="LocationReport" />
+        </EntityType>
+        <EntityType Name="Unit">
+          <Key>
+            <PropertyRef Name="UnitID" />
+          </Key>
+          <Property Name="UnitID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="LocationReport" Relationship="ScoutSystem.Entities.FK_LocationReport_Unit" FromRole="Unit" ToRole="LocationReport" />
+        </EntityType>
+        <Association Name="FK_DistributionListProduction_Production">
+          <End Type="ScoutSystem.Entities.Production" Role="Production" Multiplicity="1" />
+          <End Type="ScoutSystem.Entities.DistributionListProduction" Role="DistributionListProduction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Production">
+              <PropertyRef Name="ProductionID" />
+            </Principal>
+            <Dependent Role="DistributionListProduction">
+              <PropertyRef Name="ProductionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LocationReport_Prodiction">
+          <End Type="ScoutSystem.Entities.Production" Role="Production" Multiplicity="1" />
+          <End Type="ScoutSystem.Entities.LocationReport" Role="LocationReport" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Production">
+              <PropertyRef Name="ProductionID" />
+            </Principal>
+            <Dependent Role="LocationReport">
+              <PropertyRef Name="ProductionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Attachment_IncidentReport">
+          <End Type="ScoutSystem.Entities.IncidentReport" Role="IncidentReport" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="ScoutSystem.Entities.Attachment" Role="Attachment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IncidentReport">
+              <PropertyRef Name="IncidentReportID" />
+            </Principal>
+            <Dependent Role="Attachment">
+              <PropertyRef Name="IncidentReportID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DistributionListCategory_Category">
+          <End Type="ScoutSystem.Entities.Category" Role="Category" Multiplicity="1" />
+          <End Type="ScoutSystem.Entities.DistributionListCategory" Role="DistributionListCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="DistributionListCategory">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IncidentReport_CategoryID">
+          <End Type="ScoutSystem.Entities.Category" Role="Category" Multiplicity="1" />
+          <End Type="ScoutSystem.Entities.IncidentReport" Role="IncidentReport" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="IncidentReport">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Location_Contact">
+          <End Type="ScoutSystem.Entities.Contact" Role="Contact" Multiplicity="1" />
+          <End Type="ScoutSystem.Entities.Location" Role="Location" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contact">
+              <PropertyRef Name="ContactID" />
+            </Principal>
+            <Dependent Role="Location">
+              <PropertyRef Name="ContactID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DistributionListCategory_DistributionList">
+          <End Type="ScoutSystem.Entities.DistributionList" Role="DistributionList" Multiplicity="1" />
+          <End Type="ScoutSystem.Entities.DistributionListCategory" Role="DistributionListCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DistributionList">
+              <PropertyRef Name="DistributionListID" />
+            </Principal>
+            <Dependent Role="DistributionListCategory">
+              <PropertyRef Name="DistributionListID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DistributionListProduction_DistributionList">
+          <End Type="ScoutSystem.Entities.DistributionList" Role="DistributionList" Multiplicity="1" />
+          <End Type="ScoutSystem.Entities.DistributionListProduction" Role="DistributionListProduction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DistributionList">
+              <PropertyRef Name="DistributionListID" />
+            </Principal>
+            <Dependent Role="DistributionListProduction">
+              <PropertyRef Name="DistributionListID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LocalReportExternalService_ExternalService_ExternalServiceID">
+          <End Type="ScoutSystem.Entities.ExternalService" Role="ExternalService" Multiplicity="1" />
+          <End Type="ScoutSystem.Entities.LocationReportExternalService" Role="LocationReportExternalService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ExternalService">
+              <PropertyRef Name="ExternalServiceID" />
+            </Principal>
+            <Dependent Role="LocationReportExternalService">
+              <PropertyRef Name="ExternalServiceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IncidentReport_LocationReport">
+          <End Type="ScoutSystem.Entities.LocationReport" Role="LocationReport" Multiplicity="1" />
+          <End Type="ScoutSystem.Entities.IncidentReport" Role="IncidentReport" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LocationReport">
+              <PropertyRef Name="LocationReportID" />
+            </Principal>
+            <Dependent Role="IncidentReport">
+              <PropertyRef Name="LocationReportID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MailingHistory_IncidentReport">
+          <End Type="ScoutSystem.Entities.IncidentReport" Role="IncidentReport" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="ScoutSystem.Entities.IncidentReportMailingHistory" Role="IncidentReportMailingHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IncidentReport">
+              <PropertyRef Name="IncidentReportID" />
+            </Principal>
+            <Dependent Role="IncidentReportMailingHistory">
+              <PropertyRef Name="IncidentReportID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LocationReport_Location">
+          <End Type="ScoutSystem.Entities.Location" Role="Location" Multiplicity="1" />
+          <End Type="ScoutSystem.Entities.LocationReport" Role="LocationReport" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="LocationID" />
+            </Principal>
+            <Dependent Role="LocationReport">
+              <PropertyRef Name="LocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LocationReport_Unit">
+          <End Type="ScoutSystem.Entities.Unit" Role="Unit" Multiplicity="1" />
+          <End Type="ScoutSystem.Entities.LocationReport" Role="LocationReport" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Unit">
+              <PropertyRef Name="UnitID" />
+            </Principal>
+            <Dependent Role="LocationReport">
+              <PropertyRef Name="UnitID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LocationReportExternalService_LocationReport_LocationReportID">
+          <End Type="ScoutSystem.Entities.LocationReport" Role="LocationReport" Multiplicity="1" />
+          <End Type="ScoutSystem.Entities.LocationReportExternalService" Role="LocationReportExternalService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LocationReport">
+              <PropertyRef Name="LocationReportID" />
+            </Principal>
+            <Dependent Role="LocationReportExternalService">
+              <PropertyRef Name="LocationReportID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DistributionList_User">
+          <End Type="ScoutSystem.Entities.UserInfo" Role="UserInfo" Multiplicity="1" />
+          <End Type="ScoutSystem.Entities.DistributionList" Role="DistributionList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="AspUserID" />
+            </Principal>
+            <Dependent Role="DistributionList">
+              <PropertyRef Name="AspUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LocationReport_User">
+          <End Type="ScoutSystem.Entities.UserInfo" Role="UserInfo" Multiplicity="1" />
+          <End Type="ScoutSystem.Entities.LocationReport" Role="LocationReport" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="AspUserID" />
+            </Principal>
+            <Dependent Role="LocationReport">
+              <PropertyRef Name="AspUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MailingHistory_User">
+          <End Type="ScoutSystem.Entities.UserInfo" Role="UserInfo" Multiplicity="1" />
+          <End Type="ScoutSystem.Entities.IncidentReportMailingHistory" Role="IncidentReportMailingHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="AspUserID" />
+            </Principal>
+            <Dependent Role="IncidentReportMailingHistory">
+              <PropertyRef Name="AspUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ScoutSystemEntitiesStoreContainer" CdmEntityContainer="ScoutSystemDevEntities">
+          <EntitySetMapping Name="UserInfo">
+            <EntityTypeMapping TypeName="ScoutSystem.Entities.UserInfo">
+              <MappingFragment StoreEntitySet="UserInfo">
+                <ScalarProperty Name="SSO" ColumnName="SSO" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="AspUserID" ColumnName="AspUserID" />
+                <ScalarProperty Name="ProductionID" ColumnName="ProductionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Production">
+            <EntityTypeMapping TypeName="ScoutSystem.Entities.Production">
+              <MappingFragment StoreEntitySet="Production">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ProductionID" ColumnName="ProductionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ScoutDailyReport">
+            <EntityTypeMapping TypeName="ScoutSystem.Entities.ScoutDailyReport">
+              <MappingFragment StoreEntitySet="ScoutDailyReport">
+                <ScalarProperty Name="IsDraft" ColumnName="IsDraft" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="LocationOptions" ColumnName="LocationOptions" />
+                <ScalarProperty Name="LocationsVisited" ColumnName="LocationsVisited" />
+                <ScalarProperty Name="CarNumber" ColumnName="CarNumber" />
+                <ScalarProperty Name="Task" ColumnName="Task" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="ProductionID" ColumnName="ProductionID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="EntryID" ColumnName="EntryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Attachment">
+            <EntityTypeMapping TypeName="ScoutSystem.Entities.Attachment">
+              <MappingFragment StoreEntitySet="Attachment">
+                <ScalarProperty Name="File" ColumnName="File" />
+                <ScalarProperty Name="IncidentReportID" ColumnName="IncidentReportID" />
+                <ScalarProperty Name="AttachmentID" ColumnName="AttachmentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Category">
+            <EntityTypeMapping TypeName="ScoutSystem.Entities.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Contact">
+            <EntityTypeMapping TypeName="ScoutSystem.Entities.Contact">
+              <MappingFragment StoreEntitySet="Contact">
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ContactID" ColumnName="ContactID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DistributionList">
+            <EntityTypeMapping TypeName="ScoutSystem.Entities.DistributionList">
+              <MappingFragment StoreEntitySet="DistributionList">
+                <ScalarProperty Name="AspUserID" ColumnName="AspUserID" />
+                <ScalarProperty Name="Primary" ColumnName="Primary" />
+                <ScalarProperty Name="DistributionListID" ColumnName="DistributionListID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DistributionListCategory">
+            <EntityTypeMapping TypeName="ScoutSystem.Entities.DistributionListCategory">
+              <MappingFragment StoreEntitySet="DistributionListCategory">
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="DistributionListID" ColumnName="DistributionListID" />
+                <ScalarProperty Name="DistributionListCategoryID" ColumnName="DistributionListCategoryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DistributionListProduction">
+            <EntityTypeMapping TypeName="ScoutSystem.Entities.DistributionListProduction">
+              <MappingFragment StoreEntitySet="DistributionListProduction">
+                <ScalarProperty Name="ProductionID" ColumnName="ProductionID" />
+                <ScalarProperty Name="DistributionListID" ColumnName="DistributionListID" />
+                <ScalarProperty Name="DistributionListProductionID" ColumnName="DistributionListProductionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ExternalService">
+            <EntityTypeMapping TypeName="ScoutSystem.Entities.ExternalService">
+              <MappingFragment StoreEntitySet="ExternalService">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ExternalServiceID" ColumnName="ExternalServiceID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IncidentReport">
+            <EntityTypeMapping TypeName="ScoutSystem.Entities.IncidentReport">
+              <MappingFragment StoreEntitySet="IncidentReport">
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="LocationReportID" ColumnName="LocationReportID" />
+                <ScalarProperty Name="IncidentReportID" ColumnName="IncidentReportID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IncidentReportMailingHistory">
+            <EntityTypeMapping TypeName="ScoutSystem.Entities.IncidentReportMailingHistory">
+              <MappingFragment StoreEntitySet="IncidentReportMailingHistory">
+                <ScalarProperty Name="AspUserID" ColumnName="AspUserID" />
+                <ScalarProperty Name="IncidentReportID" ColumnName="IncidentReportID" />
+                <ScalarProperty Name="IncidentReportMailingHistoryID" ColumnName="IncidentReportMailingHistoryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Location">
+            <EntityTypeMapping TypeName="ScoutSystem.Entities.Location">
+              <MappingFragment StoreEntitySet="Location">
+                <ScalarProperty Name="ContactID" ColumnName="ContactID" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LocationReport">
+            <EntityTypeMapping TypeName="ScoutSystem.Entities.LocationReport">
+              <MappingFragment StoreEntitySet="LocationReport">
+                <ScalarProperty Name="AspUserID" ColumnName="AspUserID" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="LastVehicle" ColumnName="LastVehicle" />
+                <ScalarProperty Name="ProductionEnd" ColumnName="ProductionEnd" />
+                <ScalarProperty Name="DinnerBreakEnd" ColumnName="DinnerBreakEnd" />
+                <ScalarProperty Name="DinnerBreak" ColumnName="DinnerBreak" />
+                <ScalarProperty Name="ProductionLunchEnd" ColumnName="ProductionLunchEnd" />
+                <ScalarProperty Name="ProductionLunch" ColumnName="ProductionLunch" />
+                <ScalarProperty Name="CleaningCrewEnd" ColumnName="CleaningCrewEnd" />
+                <ScalarProperty Name="CleaningCrewArrival" ColumnName="CleaningCrewArrival" />
+                <ScalarProperty Name="PoliceEnd" ColumnName="PoliceEnd" />
+                <ScalarProperty Name="PoliceShift" ColumnName="PoliceShift" />
+                <ScalarProperty Name="PoliceArrival" ColumnName="PoliceArrival" />
+                <ScalarProperty Name="CateringEnd" ColumnName="CateringEnd" />
+                <ScalarProperty Name="CateringArrival" ColumnName="CateringArrival" />
+                <ScalarProperty Name="ProductionStart" ColumnName="ProductionStart" />
+                <ScalarProperty Name="SiteEnd" ColumnName="SiteEnd" />
+                <ScalarProperty Name="SiteStart" ColumnName="SiteStart" />
+                <ScalarProperty Name="UnitID" ColumnName="UnitID" />
+                <ScalarProperty Name="ProductionID" ColumnName="ProductionID" />
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+                <ScalarProperty Name="LocationReportID" ColumnName="LocationReportID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LocationReportExternalService">
+            <EntityTypeMapping TypeName="ScoutSystem.Entities.LocationReportExternalService">
+              <MappingFragment StoreEntitySet="LocationReportExternalService">
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="ExternalServiceID" ColumnName="ExternalServiceID" />
+                <ScalarProperty Name="LocationReportID" ColumnName="LocationReportID" />
+                <ScalarProperty Name="LocationReportExternalServiceID" ColumnName="LocationReportExternalServiceID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Unit">
+            <EntityTypeMapping TypeName="ScoutSystem.Entities.Unit">
+              <MappingFragment StoreEntitySet="Unit">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="UnitID" ColumnName="UnitID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

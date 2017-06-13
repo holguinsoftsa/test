@@ -1,0 +1,15 @@
+﻿<div class="bottom-panel-shadow" ng-show="ngModel.Show">
+    <div class="bottom-panel" ng-class="{fullheight:fullheight == ''}">
+        <div class="bottom-panel-head">
+            <div class="head-left">
+                {{title}}
+            </div>
+            <div class="head-right">
+                <button ng-click="ngModel.Close()" class="head-x-button">x</button>
+            </div>
+        </div>
+        <div class="panel-content" ng-transclude>
+
+        </div>
+    </div>
+</div>

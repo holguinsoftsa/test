@@ -1,0 +1,51 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScoutSystem.Entities", "ScoutSystem.Entities\ScoutSystem.Entities.csproj", "{53F8E07B-E2A9-4CD4-832B-3B93A9C6B4A6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScoutSystem", "ScoutSystem\ScoutSystem.csproj", "{D75D0327-8EAE-4055-A6F0-207C4359F8D5}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "ScoutSystem.DB", "ScoutSystem.DB\ScoutSystem.DB.sqlproj", "{2361118B-7DB3-4E99-A911-D3E0960AD642}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{53F8E07B-E2A9-4CD4-832B-3B93A9C6B4A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53F8E07B-E2A9-4CD4-832B-3B93A9C6B4A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53F8E07B-E2A9-4CD4-832B-3B93A9C6B4A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53F8E07B-E2A9-4CD4-832B-3B93A9C6B4A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D75D0327-8EAE-4055-A6F0-207C4359F8D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D75D0327-8EAE-4055-A6F0-207C4359F8D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D75D0327-8EAE-4055-A6F0-207C4359F8D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D75D0327-8EAE-4055-A6F0-207C4359F8D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2361118B-7DB3-4E99-A911-D3E0960AD642}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2361118B-7DB3-4E99-A911-D3E0960AD642}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2361118B-7DB3-4E99-A911-D3E0960AD642}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{2361118B-7DB3-4E99-A911-D3E0960AD642}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2361118B-7DB3-4E99-A911-D3E0960AD642}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2361118B-7DB3-4E99-A911-D3E0960AD642}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 4
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tlmdvsts.visualstudio.com/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ScoutSystem.Entities\\ScoutSystem.Entities.csproj
+		SccProjectName1 = ScoutSystem.Entities
+		SccLocalPath1 = ScoutSystem.Entities
+		SccProjectUniqueName2 = ScoutSystem\\ScoutSystem.csproj
+		SccProjectName2 = ScoutSystem
+		SccLocalPath2 = ScoutSystem
+		SccProjectUniqueName3 = ScoutSystem.DB\\ScoutSystem.DB.sqlproj
+		SccProjectName3 = ScoutSystem.DB
+		SccLocalPath3 = ScoutSystem.DB
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,136 @@
+﻿@using Microsoft.AspNet.Identity
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html ng-app="locationhub" ng-cloak>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Location Hub</title>
+    <meta name="theme-color" content="#000000">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="no">  <!--Only works with Single paged apps-->
+    <link rel="icon" href="/Img/logo_telemundo_mini.png">
+    <link rel="apple-touch-icon" sizes="57x57" href="/Img/ios_icon_telemundo_57.png">
+    <link rel="apple-touch-icon" sizes="77x77" href="/Img/ios_icon_telemundo_77.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/Img/ios_icon_telemundo_114.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/Img/ios_icon_telemundo_144.png">
+    <link rel="apple-touch-icon" sizes="512x512" href="/Img/ios_icon_telemundo_512.png">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400|Roboto+Condensed" rel="stylesheet">
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/navbar-fixed-side.css" rel="stylesheet" />
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/angular-datepicker.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-select/0.20.0/select.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="~/Scripts/Json.dateParser.js"></script>
+    <script src="~/Scripts/moment.min.js"></script>
+    @Scripts.Render("~/Bundles/angular")
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-select/0.20.0/select.js"></script>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="col-sm-3 col-lg-2">
+            <div class="navbar navbar-default navbar-fixed-side" ng-controller="NavbarController">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="/" target="_self">Location Hub</a>
+                    </div>
+                </div>
+                @*Links need to have target="-self" to work with angular location dependency and Html5Mode: true*@
+                <nav class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+
+                        @if (User.IsInRole(UserRole.Scout.ToString()))
+                        {
+                            Html.RenderPartial("_LayoutNavbarRoles/" + UserRole.Scout);
+                        }
+                        @if (this.User.IsInRole(UserRole.Admin.ToString()))
+                        {
+                            Html.RenderPartial("_LayoutNavbarRoles/" + UserRole.Admin);
+                        }
+                        @if (this.User.IsInRole(UserRole.Manager.ToString()) || this.User.IsInRole(UserRole.Admin.ToString()))
+                        {
+                            Html.RenderPartial("_LayoutNavbarRoles/" + UserRole.Manager);
+                        }
+                        @if (this.User.IsInRole(UserRole.BusinessAffair.ToString()) || this.User.IsInRole(UserRole.Executive.ToString()))
+                        {
+                            Html.RenderPartial("_LayoutNavbarRoles/" + UserRole.BusinessAffair);
+                        }
+                        @if (this.User.IsInRole(UserRole.OnSiteManager.ToString()))
+                        {
+                            Html.RenderPartial("_LayoutNavbarRoles/" + UserRole.OnSiteManager);
+                        }
+                        <li><a ng-class="{'menu-selected': isActive('/Home/Contact/')}" href="/Home/Contact/" target="_self">Contact Us</a></li>
+                    </ul>
+
+                    @if (Request.IsAuthenticated)
+                    {
+                        <form action="/Account/LogOff" class="navbar-right" id="logoutForm" method="post">
+                            @Html.AntiForgeryToken()
+                            <ul class="nav navbar-nav navbar-right">
+                                <li>
+                                    <a ng-class="{'menu-selected': isActive('/Manage/')}" href="/Manage/" target="_self">My Account</a>
+                                </li>
+                                <li><a class="username-link" href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+                                <li class="menu-email">
+                                    {{User.Username}} ({{User.SSO}})
+                                </li>
+                            </ul>
+                        </form>
+                    }
+                    else
+                    {
+                        <div class="form-group">
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><a ng-class="{'menu-selected': isActive('/Account/Login')}" href="/Account/Login" id="loginLink" target="_self">Log in</a></li>
+                            </ul>
+                        </div>
+                        <!--Logo-->
+                        <div class="row">
+                            <div class="col-sm-6 col-sm-offset-3 hidden-xs menu-email">
+                                <img class="img-responsive menu-email" src="~/Img/logo_Telemundo.png" />
+                            </div>
+                        </div>
+                    }
+                </nav>
+            </div>
+        </div>
+    </div>
+    <main class="body-content col-sm-9 col-lg-10">
+
+        <!--Loading Circle-->
+        @Html.Partial("Controllers/Loader")
+
+        <!--Signature-->
+        @Html.Partial("Controllers/Signature")
+
+        <!--Alerts-->
+        @Html.Partial("Controllers/Alerts")
+
+        <!--Body-->
+        @RenderBody()
+
+    </main>
+
+    @Scripts.Render("~/Bundles/bootstrap")
+    @Scripts.Render("~/Bundles/modernizr")
+    @Scripts.Render("~/Bundles/signature_pad")
+    @*@Scripts.Render("~/Bundles/ckeditor")*@
+    <script>
+        window.CKEDITOR_BASEPATH = '/Scripts/ckeditor/';
+    </script>
+    <script src="~/Scripts/ckeditor/ckeditor.js"></script>
+    @Scripts.Render("~/Bundles/controllers")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

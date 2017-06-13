@@ -1,0 +1,15 @@
+﻿<ul class="pagination">
+    <li class="page-item" ng-class="{disabled: ngModel.Number == 0}" ng-click="clickPrev()">
+        <a class="page-link" href="#" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+        </a>
+    </li>
+    <li ng-repeat="n in list" ng-class="{active: (ngModel.Number == n)}" ng-click="onClick(n)">
+        <a>{{n + 1}}</a>
+    </li>
+    <li class="page-item" ng-class="{disabled: ngModel.Number == ngModel.Count - 1}" ng-click="clickNext()">
+        <a class="page-link" href="#" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+        </a>
+    </li>
+</ul>
